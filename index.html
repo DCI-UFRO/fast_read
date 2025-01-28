@@ -28,16 +28,19 @@
     </style>
 </head>
 <body>
-    <h1>Manipulación de Texto</h1>
+    <h1>Lectura Veloz</h1>
     <textarea id="textInput" placeholder="Pega o escribe tu texto aquí..."></textarea>
     <br>
-    <button onclick="processText()">Eliminar Texto</button>
+    <button onclick="processText()">Cargar Texto</button>
     <br><br>
-    <button onclick="extractPdfText()">Extraer texto del PDF</button>
+    <button onclick="extractPdfText()">Cargar texto del PDF</button>
     <br><br>
-    <button onclick="runCustomFunction()">Ejecutar Función Personalizada</button>
+    <button onclick="runCustomFunction()">Iniciar Lectura</button>
     <input type="file" id="pdfInput" accept="application/pdf" style="margin-top: 20px;" />
     <div id="output"></div>
+    <br><br>
+    <button onclick="resetTextInput()">Resetear</button>
+    <br><br>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script>
@@ -88,6 +91,12 @@
             };
 
             fileReader.readAsArrayBuffer(file);
+        }
+
+        function resetTextInput() {
+            const textInput = document.getElementById('textInput');
+            textInput.value = '';
+            document.getElementById('output').innerHTML = '';
         }
 
         function runCustomFunction() {
