@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manipulación de Texto</title>
+    <title>Lectura veloz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,10 +33,10 @@
     <br>
     <button onclick="processText()">Eliminar Texto</button>
     <br><br>
-    <button onclick="runCustomFunction()">Ejecutar Función Personalizada</button>
-    <br><br>
-    <input type="file" id="pdfInput" accept="application/pdf" />
     <button onclick="extractPdfText()">Extraer texto del PDF</button>
+    <br><br>
+    <button onclick="runCustomFunction()">Ejecutar Función Personalizada</button>
+    <input type="file" id="pdfInput" accept="application/pdf" style="margin-top: 20px;" />
     <div id="output"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
@@ -50,24 +50,9 @@
 
             // Eliminar el texto del cuadro de texto
             textInput.value = '';
-        }
 
-        function runCustomFunction() {
-            (function(){
-                sq = window.sq = window.sq || {};
-                if (sq.script) {
-                    sq.again();
-                } else {
-                    sq.bookmarkletVersion = '0.3.0';
-                    sq.iframeQueryParams = {
-                        host: '//squirt.io',
-                        userId: 'bca0e5ac-1b26-4328-86a4-609ede5c08c6',
-                    };
-                    sq.script = document.createElement('script');
-                    sq.script.src = sq.iframeQueryParams.host + '/bookmarklet/frame.outer.js';
-                    document.body.appendChild(sq.script);
-                }
-            })();
+            // Ejecutar la función personalizada
+            runCustomFunction();
         }
 
         async function extractPdfText() {
@@ -97,9 +82,30 @@
                 }
 
                 outputDiv.innerHTML = `<p>${text}</p>`;
+
+                // Ejecutar la función personalizada
+                runCustomFunction();
             };
 
             fileReader.readAsArrayBuffer(file);
+        }
+
+        function runCustomFunction() {
+            (function(){
+                sq = window.sq = window.sq || {};
+                if (sq.script) {
+                    sq.again();
+                } else {
+                    sq.bookmarkletVersion = '0.3.0';
+                    sq.iframeQueryParams = {
+                        host: '//squirt.io',
+                        userId: 'bca0e5ac-1b26-4328-86a4-609ede5c08c6',
+                    };
+                    sq.script = document.createElement('script');
+                    sq.script.src = sq.iframeQueryParams.host + '/bookmarklet/frame.outer.js';
+                    document.body.appendChild(sq.script);
+                }
+            })();
         }
     </script>
 </body>
