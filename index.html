@@ -34,8 +34,12 @@
     <button onclick="processText()">Eliminar Texto</button>
     <br><br>
     <button onclick="runCustomFunction()">Ejecutar Función Personalizada</button>
+    <br><br>
+    <input type="file" id="pdfInput" accept="application/pdf" />
+    <button onclick="extractPdfText()">Extraer texto del PDF</button>
     <div id="output"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script>
         function processText() {
             // Obtener el texto del cuadro de texto
@@ -64,6 +68,38 @@
                     document.body.appendChild(sq.script);
                 }
             })();
+        }
+
+        async function extractPdfText() {
+            const fileInput = document.getElementById('pdfInput');
+            const outputDiv = document.getElementById('output');
+
+            if (fileInput.files.length === 0) {
+                alert('Por favor, selecciona un archivo PDF.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const fileReader = new FileReader();
+
+            fileReader.onload = async function () {
+                const typedArray = new Uint8Array(this.result);
+                const pdf = await pdfjsLib.getDocument(typedArray).promise;
+
+                let text = '';
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    textContent.items.forEach(item => {
+                        text += item.str + ' ';
+                    });
+                }
+
+                outputDiv.innerHTML = `<p>${text}</p>`;
+            };
+
+            fileReader.readAsArrayBuffer(file);
         }
     </script>
 </body>
