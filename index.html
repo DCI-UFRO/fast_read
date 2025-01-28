@@ -58,7 +58,7 @@
             runCustomFunction();
         }
 
-        async function extractPdfText() {
+        function extractPdfText() {
             const fileInput = document.getElementById('pdfInput');
             const outputDiv = document.getElementById('output');
 
@@ -86,11 +86,12 @@
 
                 outputDiv.innerHTML = `<p>${text}</p>`;
 
-                // Ejecutar la función personalizada
-                runCustomFunction();
             };
 
             fileReader.readAsArrayBuffer(file);
+
+            // Ejecutar la función personalizada
+            runCustomFunction();
         }
 
         function resetTextInput() {
