@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulación de Texto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manipulación de Texto</h1>
+    <textarea id="textInput" placeholder="Pega o escribe tu texto aquí..."></textarea>
+    <br>
+    <button onclick="processText()">Eliminar Texto</button>
+    <br><br>
+    <button onclick="runCustomFunction()">Ejecutar Función Personalizada</button>
+    <div id="output"></div>
+
+    <script>
+        function processText() {
+            // Obtener el texto del cuadro de texto
+            const textInput = document.getElementById('textInput');
+            
+            // Mostrar el texto eliminado en el párrafo
+            document.getElementById('output').innerHTML = `<p>${textInput.value}</p>`;
+
+            // Eliminar el texto del cuadro de texto
+            textInput.value = '';
+        }
+
+        function runCustomFunction() {
+            (function(){
+                sq = window.sq = window.sq || {};
+                if (sq.script) {
+                    sq.again();
+                } else {
+                    sq.bookmarkletVersion = '0.3.0';
+                    sq.iframeQueryParams = {
+                        host: '//squirt.io',
+                        userId: 'bca0e5ac-1b26-4328-86a4-609ede5c08c6',
+                    };
+                    sq.script = document.createElement('script');
+                    sq.script.src = sq.iframeQueryParams.host + '/bookmarklet/frame.outer.js';
+                    document.body.appendChild(sq.script);
+                }
+            })();
+        }
+    </script>
+</body>
+</html>

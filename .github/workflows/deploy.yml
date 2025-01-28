@@ -1,0 +1,23 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto si tu rama es diferente (por ejemplo, "gh-pages")
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Setup GitHub Pages
+        uses: actions/setup-pages@v2
+
+      - name: Deploy
+        run: |
+          mkdir -p public
+          cp index.html public/
+          echo "Your GitHub Page is being served from /public"
